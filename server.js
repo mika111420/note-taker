@@ -68,8 +68,13 @@ app.delete('/api/notes/:id',(req,res)=>{
     const data = JSON.parse(fs.readFileSync("./db/db.json","utf-8"))
     const filterData =  data.filter(note => note.id !== req.params.id)
 
-    
-})
+    fs.writeFile('./db/db.json', JSON.stringify(filterData, null, 4 ),(writeErr) =>
+    writeErr
+      ? console.error(writeErr)
+      : console.info('Successfully deleted note!')
+)
+  res.status(200).json({ok: true})
+});
 
 
 app.listen(PORT, () => {
