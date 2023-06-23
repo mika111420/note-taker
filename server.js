@@ -64,6 +64,14 @@ app.post('/api/notes', (req, res) => {
     }
   });
   
+app.delete('/api/notes/:id',(req,res)=>{
+    const data = JSON.parse(fs.readFileSync("./db/db.json","utf-8"))
+    const filterData =  data.filter(note => note.id !== req.params.id)
+
+    
+})
+
+
 app.listen(PORT, () => {
     console.log(`Server started on ${PORT}`);
 })
